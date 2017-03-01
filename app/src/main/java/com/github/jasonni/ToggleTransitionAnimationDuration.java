@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0-rc1'
+package com.github.jasonni;
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+import android.service.quicksettings.TileService;
+import uk.co.nickbutcher.animatordurationtile.AnimatorDurationScaler;
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+/**
+ * A {@link TileService quick settings tile} for scaling animation durations. Toggles between 1x and
+ * 5x window animation duration scales.
+ */
+public class ToggleTransitionAnimationDuration extends BaseTileService {
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    @Override
+    String getScaleType() {
+        return AnimatorDurationScaler.SCALE_TYPE_TRANSITION;
+    }
 }

@@ -1,23 +1,31 @@
-# Animator Duration Quick Settings Tile
+# Developer Options Quick Settings Tiles
 
-A quick settings tile to quickly toggle the animator duration scale:
+### Include
 
-1. Pressing the tile toggles between 5x & 1x duration scales.
-2. Long pressing the tile allows selecting from the full choice of scales.
+- Animator Duration, Window Animation and Transition Animation Quick Settings Tiles
+- Keep Activities Quick Settings Tiles (fork from [KeepActivitiesTile](https://github.com/Stocard/KeepActivitiesTile))
 
 Note that this app requires you to **manually grant permission** to allow the app to alter the animator duration setting. To do this, issue the following `adb` command:
 
 `adb shell pm grant uk.co.nickbutcher.animatordurationtile android.permission.WRITE_SECURE_SETTINGS`
+`adb shell pm grant uk.co.nickbutcher.animatordurationtile android.permission.SET_ALWAYS_FINISH`
 
 This app also only runs on Nougat+ devices.
 
-👉 **[Download APK](https://github.com/nickbutcher/AnimatorDurationTile/releases)** 👈
+👉 **[Download APK](https://github.com/nickbutcher/AnimatorDurationTile/releases)**
+
+
+### Animator Duration, Window Animation and Transition Animation Quick Settings Tiles
+
+A quick settings tile to quickly toggle the duration scale:
+
+Pressing the tile allows selecting from the full choice of scales.
 
 <img src="screenshots/duration_scale_toggle_demo.gif" align="middle">
 
+### Keep Activities Quick Settings Tiles (fork from [KeepActivitiesTile](https://github.com/Stocard/KeepActivitiesTile))
 
-This is not an official Google product.
-
+A quick settings tile to quickly toggle "Don't keep activities".
 
 ### License
 

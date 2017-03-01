@@ -26,24 +26,35 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.CheckedTextView;
 
+import static uk.co.nickbutcher.animatordurationtile.AnimatorDurationScaler.ScaleType;
+import static uk.co.nickbutcher.animatordurationtile.AnimatorDurationScaler.getAnimatorScale;
+import static uk.co.nickbutcher.animatordurationtile.AnimatorDurationScaler.setAnimatorScale;
+
 /**
  * An Activity which allows selecting the animator duration scale from a full list, accessed by
  * long pressing the quick action tile.
  */
 public class SelectAnimatorDuration extends Activity {
 
+    public static @ScaleType String map(String scaleType) {
+        return scaleType;
+    }
+
+    private @ScaleType String scaleType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_scale_dialog);
-        float scale = AnimatorDurationScaler.getAnimatorScale(getContentResolver());
+        scaleType = map(getIntent().getStringExtra("SCALE_TYPE"));
+        float scale = getAnimatorScale(getContentResolver(), scaleType);
         ((Checkable) findViewById(getScaleItemId(scale))).setChecked(true);
     }
 
     public void scaleClick(View v) {
         uncheckAllChildren((ViewGroup) v.getParent());
         ((CheckedTextView) v).setChecked(true);
-        AnimatorDurationScaler.setAnimatorScale(this, getScale(v.getId()));
+        setAnimatorScale(this, scaleType, getScale(v.getId()));
         finishAfterTransition();
     }
 

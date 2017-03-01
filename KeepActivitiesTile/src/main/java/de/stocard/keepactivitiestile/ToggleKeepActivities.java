@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Stocard GmbH.
  * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +15,22 @@
  * limitations under the License.
  */
 
-package uk.co.nickbutcher.animatordurationtile;
+package de.stocard.keepactivitiestile;
 
 import android.graphics.drawable.Icon;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import static uk.co.nickbutcher.animatordurationtile.AnimatorDurationScaler.getAnimatorScale;
-import static uk.co.nickbutcher.animatordurationtile.AnimatorDurationScaler.getIcon;
+import static de.stocard.keepactivitiestile.KeepActivitiesToggle.getIcon;
+import static de.stocard.keepactivitiestile.KeepActivitiesToggle.getKeepActivities;
+import static de.stocard.keepactivitiestile.KeepActivitiesToggle.getLabel;
 
 /**
- * A {@link TileService quick settings tile} for scaling animation durations. Toggles between 1x and
- * 5x animator duration scales.
+ * A {@link TileService quick settings tile} for toggling "Don't keep activities".
  */
-public class ToggleAnimatorDuration extends TileService {
+public class ToggleKeepActivities extends TileService {
 
-    public ToggleAnimatorDuration() { }
+    public ToggleKeepActivities() { }
 
     @Override
     public void onStartListening() {
@@ -39,16 +40,17 @@ public class ToggleAnimatorDuration extends TileService {
 
     @Override
     public void onClick() {
-        final float current = getAnimatorScale(getContentResolver());
-        final float target = current == 1f ? 5f : 1f;
-        AnimatorDurationScaler.setAnimatorScale(this, target);
+        final boolean current = getKeepActivities(getContentResolver());
+        final boolean target = !current;
+        KeepActivitiesToggle.setKeepActivities(this, target);
         updateTile();
     }
 
     private void updateTile() {
-        final float scale = getAnimatorScale(getContentResolver());
+        final boolean keepActivities = getKeepActivities(getContentResolver());
         final Tile tile = getQsTile();
-        tile.setIcon(Icon.createWithResource(getApplicationContext(), getIcon(scale)));
+        tile.setIcon(Icon.createWithResource(getApplicationContext(), getIcon(keepActivities)));
+        tile.setLabel(getString(getLabel(keepActivities)));
         tile.updateTile();
     }
 

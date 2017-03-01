@@ -27,11 +27,35 @@
         android:theme="@style/Theme">
 
         <service
-            android:name=".ToggleAnimatorDuration"
+            android:name="com.github.jasonni.ToggleAnimatorDuration"
             android:enabled="true"
             android:exported="true"
             android:icon="@drawable/ic_animator_duration"
             android:label="@string/label_toggle_animator_duration_scale"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.github.jasonni.ToggleWindowAnimationDuration"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ic_animator_duration"
+            android:label="@string/label_toggle_window_animation_scale"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.github.jasonni.ToggleTransitionAnimationDuration"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ic_animator_duration"
+            android:label="@string/label_toggle_transition_animation_scale"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -44,9 +68,9 @@
             android:theme="@android:style/Theme.Material.Light.Dialog"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance">
-            <intent-filter>
+<!--            <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
     </application>
